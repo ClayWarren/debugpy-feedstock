@@ -34,7 +34,8 @@ for binary in binaries:
     assert actual == machine, (str(binary), hex(actual), hex(machine))
     print(f"PE {actual:#06x}: {binary.relative_to(root)}")
 
-from pydevd_attach_to_process.add_code_to_python_process import get_target_filename
+with debugpy._vendored.vendored("pydevd"):
+    from pydevd_attach_to_process.add_code_to_python_process import get_target_filename
 for prefix, extension in (("attach_", ".dll"), ("run_code_on_dllmain_", ".dll"), ("inject_dll_", ".exe")):
     assert get_target_filename(True, prefix, extension), (prefix, extension)
 
