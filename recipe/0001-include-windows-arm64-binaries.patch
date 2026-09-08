@@ -1,0 +1,17 @@
+From: Clay Warren
+Subject: Include native Windows ARM64 binaries in package data
+
+The platform filter currently drops every Windows binary on win-arm64,
+including locally compiled pydevd extensions and attach helpers.
+
+--- a/setup.py
++++ b/setup.py
+@@ -116,7 +116,7 @@
+             if tail_is(".dylib"):
+                 return plat.startswith("macosx")
+             if tail_is(".exe", ".dll", ".pdb", ".pyd"):
+-                return plat in ("win32", "win-amd64")
++                return plat in ("win32", "win-amd64", "win-arm64")
+             if tail_is("-i386-linux-gnu.so", "_linux_x86.so"):
+                 return plat == "linux-i686"
+             if tail_is("-x86_64-linux-gnu.so", "_linux_amd64.so"):

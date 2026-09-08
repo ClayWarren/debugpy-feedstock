@@ -11,9 +11,12 @@ package:
 source:
   url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/${{ name }}-${{ version }}.tar.gz
   sha256: a3c53278e84c94e11bd87c53970ec391d1a67396c8b22609fcac576520e611a6
+  patches:
+    - if: win
+      then: 0001-include-windows-arm64-binaries.patch
 
 build:
-  number: 1
+  number: 2
 
 requirements:
   build:
@@ -45,6 +48,13 @@ tests:
     script:
       - pip check
 
+  - if: win
+    then:
+      script: python test_windows_debugging.py
+      files:
+        recipe:
+          - test_windows_debugging.py
+
 about:
   license: MIT
   license_file:
@@ -55,6 +65,7 @@ about:
   repository: https://github.com/microsoft/debugpy
 
 extra:
+  feedstock-name: debugpy
   recipe-maintainers:
     - jtilly
     - xhochy
