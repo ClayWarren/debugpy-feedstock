@@ -2,21 +2,21 @@ schema_version: 1
 
 context:
   name: debugpy
-  version: "1.8.21"
+  version: "1.8.22"
 
 package:
-  name: ${{ name|lower }}
+  name: debugpy
   version: ${{ version }}
 
 source:
   url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/${{ name }}-${{ version }}.tar.gz
-  sha256: a3c53278e84c94e11bd87c53970ec391d1a67396c8b22609fcac576520e611a6
+  sha256: e489c7268e1c7b41e13b438d9c533d2a7af73fb59bf8cd30fead8286c1c39c4e
   patches:
     - if: win
       then: 0001-include-windows-arm64-binaries.patch
 
 build:
-  number: 2
+  number: 1
 
 requirements:
   build:
@@ -65,7 +65,6 @@ about:
   repository: https://github.com/microsoft/debugpy
 
 extra:
-  feedstock-name: debugpy
   recipe-maintainers:
     - jtilly
     - xhochy
